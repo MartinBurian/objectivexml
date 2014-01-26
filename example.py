@@ -1,116 +1,84 @@
 __author__ = 'martinjr'
 
-
 from __init__ import ObjectiveDoc
 
 if __name__ == "__main__":
     # example data:
-    data="""<atom:feed xml:base="https://kosapi.feld.cvut.cz/api/3" xml:lang="cs">
-  <atom:id>https://kosapi.feld.cvut.cz/api/students/buriama8/parallels</atom:id>
-  <atom:updated>2014-01-22T01:44:03.743</atom:updated>
-  <atom:entry>
-    <atom:id>urn:cvut:kos:parallel:349736000</atom:id>
-    <atom:updated>2013-10-02T15:26:39.0</atom:updated>
-    <atom:author>
-      <atom:name>zichova</atom:name>
-    </atom:author>
-    <atom:link rel="self" href="parallels/349736000/"/>
-    <atom:content atom:type="xml" xsi:type="parallel">
-      <capacity>22</capacity>
-      <capacityOverfill>DENIED</capacityOverfill>
-      <code>105</code>
-      <course xlink:href="courses/A4B33OPT/">Optimalizace</course>
-      <enrollment>ALLOWED</enrollment>
-      <occupied>21</occupied>
-      <parallelType>TUTORIAL</parallelType>
-      <semester xlink:href="semesters/B131/">Zimní 2013/2014</semester>
-      <teacher xlink:href="teachers/shekhole/">Mgr. Oleksandr Shekhovtsov Ph.D.</teacher>
-      <timetableSlot>
-        <day>5</day>
-        <duration>2</duration>
-        <firstHour>5</firstHour>
-        <parity>BOTH</parity>
-        <room xlink:href="rooms/KN:E-132/">KN:E-132</room>
-      </timetableSlot>
-    </atom:content>
-  </atom:entry>
-  <atom:entry>
-    <atom:id>urn:cvut:kos:parallel:349772000</atom:id>
-    <atom:updated>2013-05-22T16:43:56.0</atom:updated>
-    <atom:author>
-      <atom:name>filandr</atom:name>
-    </atom:author>
-    <atom:link rel="self" href="parallels/349772000/"/>
-    <atom:content atom:type="xml" xsi:type="parallel">
-      <capacity>20</capacity>
-      <capacityOverfill>DENIED</capacityOverfill>
-      <code>102</code>
-      <course xlink:href="courses/A4B34EM/">Elektronika a mikroelektronika</course>
-      <enrollment>ALLOWED</enrollment>
-      <occupied>9</occupied>
-      <parallelType>TUTORIAL</parallelType>
-      <semester xlink:href="semesters/B131/">Zimní 2013/2014</semester>
-      <teacher xlink:href="teachers/janicev/">Ing. Vladimír Janíček Ph.D.</teacher>
-      <teacher xlink:href="teachers/jakovenk/">doc.Ing. Jiří Jakovenko Ph.D.</teacher>
-      <timetableSlot>
-        <day>1</day>
-        <duration>2</duration>
-        <firstHour>5</firstHour>
-        <parity>BOTH</parity>
-        <room xlink:href="rooms/T2:C3-s143/">T2:C3-s143</room>
-      </timetableSlot>
-      <timetableSlot>
-        <day>1</day>
-        <duration>2</duration>
-        <firstHour>5</firstHour>
-        <parity>BOTH</parity>
-        <room xlink:href="rooms/T2:B2-s141j/">T2:B2-s141j</room>
-      </timetableSlot>
-    </atom:content>
-  </atom:entry>
-  <atom:entry>
-    <atom:id>urn:cvut:kos:parallel:349775000</atom:id>
-    <atom:updated>2013-05-22T16:43:56.0</atom:updated>
-    <atom:author>
-      <atom:name>filandr</atom:name>
-    </atom:author>
-    <atom:link rel="self" href="parallels/349775000/"/>
-    <atom:content atom:type="xml" xsi:type="parallel">
-      <capacity>35</capacity>
-      <capacityOverfill>DENIED</capacityOverfill>
-      <code>1</code>
-      <course xlink:href="courses/A4B34EM/">Elektronika a mikroelektronika</course>
-      <enrollment>DENIED</enrollment>
-      <occupied>9</occupied>
-      <parallelType>LECTURE</parallelType>
-      <semester xlink:href="semesters/B131/">Zimní 2013/2014</semester>
-      <teacher xlink:href="teachers/jakovenk/">doc.Ing. Jiří Jakovenko Ph.D.</teacher>
-      <timetableSlot>
-        <day>2</day>
-        <duration>2</duration>
-        <firstHour>9</firstHour>
-        <parity>BOTH</parity>
-        <room xlink:href="rooms/T2:B2-s141k/">T2:B2-s141k</room>
-      </timetableSlot>
-    </atom:content>
-  </atom:entry>
-  <osearch:startIndex>0</osearch:startIndex>
-  <osearch:totalResults>9</osearch:totalResults>
-</atom:feed>
-""".encode('utf-8')
+    data="""
+    <namespace:root>
+        <entry division="sales">
+            <id>1</id>
+            <name n:attr="value">Martin</name>
+            <cars>
+                <car id="1A1 1111" used="true">Hyundai i30</car>
+                <car id="1A1 1112" used="false">Hyundai ix55</car>
+            </cars>
+            <occupation>Manager</occupation>
+            <occupation>Developer</occupation>
+            <paid>true</paid>
+            <age>32</age>
+            <secure:password>1234</secure:password>
+        </entry>
+        <entry division="sales">
+            <id>2</id>
+            <name>Standa</name>
+            <cars>
+                <car id="1A1 1111" used="true">Skoda Yetti</car>
+            </cars>
+            <occupation>Manager</occupation>
+            <paid>TRUE</paid>
+            <age>25</age>
+            <secure:password>0000</secure:password>
+        </entry>
+        <entry division="IT">
+            <id>3</id>
+            <name>Alice</name>
+            <occupation>Developer</occupation>
+            <paid>true</paid>
+            <age>22</age>
+            <secure:password>40T1_V7%Ee</secure:password>
+        </entry>
+        <entry division="IT">
+            <id>5</id>
+            <name>Bob</name>
+            <cars>
+                <car id="1A1 2718" used="true">DeLorean</car>
+            </cars>
+            <paid>false</paid>
+            <age>17</age>
+            <secure:password>hatem$</secure:password>
+        </entry>
+    </namespace:root>
+"""
 
     doc=ObjectiveDoc(data) # parse document
     doc._root.traverse() # print out the structure
 
-    entries=doc.get("atom:feed").get("atom:entry") # get entries
+    for entry in doc.get("namespace:root").entry: # iterate over all entries
+        print("RESULTS FOR %s (id %d)"%(entry.name(), entry.id())) # basic referencing
 
-    for entry in entries:
-        content=entry.get("atom:content")
+        if entry.occupation: # check if there is at leas one occupation
+            for occ in entry.occupation: # for each occupation
+                print("works in %s as %s"%(entry("division"), # entry division param
+                                              occ())) # the occupation
 
-        for teacher in entry.get("atom:content").teacher: # iterate over all teachers
-            print(teacher("xlink:href"))
+        if entry.cars: # check if there are some cars
+            for car in entry.cars.car:
+                if car("used"): # bool parsing
+                    print("uses a %s car (id %s)"%(car(), car("id")))
 
-        print("parallel code: %s"%entry.get("atom:content").code()) # print the code (unique tag, needn't be iterated)
+        if entry.paid():
+            print("a paid person uses password '%s'"%(entry.get("secure:password")(raw=True))) # use node.get("sub") when sub uses special characters
+        else:
+            print("an unpaid person uses password %s"%(entry.get("secure:password")(raw=True))) # use raw=True to prevent '0000' becoming 0
 
-        print("parallel resource: %s"%(entry.get("atom:link", rel="self")("href"))) # filter out atom:links with rel="self" (assume only one per entry)
+        if entry.age()>23: # int conversion
+            print("%s is getting a bit old"%entry.name())
+
+        print()
+
+    for entry in doc.get("namespace:root").get("entry", division="IT"): # filter out entries with division="IT" attribute
+        print("IT worker: %s"%entry.name())                             # (again, check when presence is not sure and
+                                                                        # iterate when multiple are possible)
+
 

@@ -1,6 +1,7 @@
 __author__="martinjr"
 
 import xml.sax
+import re
 
 class ObjectiveDoc:
     def __init__(self, doc="", filename="", encoding='utf-8'):
@@ -28,10 +29,15 @@ class ObjectiveDoc:
             xml.sax.parse(infile, SaxHandler(self._root))
 
 class Element:
+    _rebool=re.compile("^true$|^false$", re.I)
+    _redigit=re.compile("^\d+$")
+
     def __init__(self, name, attrs):
         self._content=""
+        self._content_parsed=None
         self._name=name
-        self._attrs=attrs
+        self._attrs={key: attrs.getValue(key) for key in attrs.getNames()} if attrs else {}
+        self._attrs_parsed={key: self._parse_value(attrs.getValue(key)) for key in attrs.getNames()} if attrs else {}
 
         self._children={}
 
@@ -42,11 +48,15 @@ class Element:
             print("REQUESTING NON-EXISTENT FIELD")
             return False
 
-    def __call__(self, attr=""):
+    def __call__(self, attr="", raw=False):
         if not attr:
-            return self._content
+            if self._content_parsed==None:
+                self._content_parsed=self._parse_value(self._content)
+            return self._content if raw else self._content_parsed
+
         elif attr in self._attrs:
-            return self._attrs.getValue(attr)
+            return self._attrs[attr] if raw else self._attrs_parsed[attr]
+
         else:
             print("UNKNOWN ATTRIBUTE "+attr)
             return False
@@ -54,15 +64,35 @@ class Element:
     def __iter__(self):
         yield self
 
-    def get(self, item, **kwargs):
-        if kwargs and item in self._children:
+    def get(self, item, filterdict={}, **kwargs):
+        if (filterdict or kwargs) and item in self._children:
+            ret=[]
+            filter=dict(filterdict, **kwargs)
+            print(filter)
             for el in self._children[item]:
-                for attr, value in kwargs.items():
-                    if el(attr)==value:
-                        return el
+                ok=True
+                for attr, value in filter.items():
+                    if el(attr)!=value:
+                        ok=False
+                        break
+                if ok:
+                    ret.append(el)
+
+            if ret:
+                return ret if len(ret)>1 else ret[0]
+            else:
+                return False
 
         else:
             return self.__getattr__(item)
+
+    def _parse_value(self, val):
+        if self._redigit.match(val):
+            return int(val)
+        elif self._rebool.match(val):
+            return (val=="true" or val=="True")
+        else:
+            return val
 
     def add_element(self, element):
         if element._name in self._children:
@@ -80,7 +110,7 @@ class Element:
                 for sub in child:
                     sub.traverse(d+1)
         else:
-            print("%s%s: %s (%s)"%("  "*d, self._name, self._content, str(self._attrs.getNames())))
+            print("%s%s: %s (%s)"%("  "*d, self._name, self._content, str(self._attrs)))
 
 class SaxHandler(xml.sax.ContentHandler):
     def __init__(self, root):
